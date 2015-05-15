@@ -1,0 +1,43 @@
+/**
+ * Created by Jiazhang_Liu on 5/15/2015.
+ */
+
+//
+//Given set of job schedules with start and end time, write a function that returns indexes of overlapping sets.
+//
+//for ex :-
+//input -> [1,2][5,6][1,5][7,8][1,6]
+//return -> [0,1,2,4]
+import java.util.Iterator;
+import java.util.Set;
+import java.util.HashSet;
+
+public class Overlap {
+
+    public Set<Integer> overlap(int[][] input) {
+        Set<Integer> result = new HashSet<Integer>();
+        if(input == null || input.length == 0 || input[0].length != 2)
+            return result;
+
+        for(int i = 0; i < input.length-1; i++) {
+            for(int j = i+1; j < input.length; j++) {
+                if (!(input[i][0] > input[j][1] || input[i][1] < input[j][0])) {
+                    result.add(i);
+                    result.add(j);
+                }
+            }
+        }
+
+        return result;
+    }
+
+    public static void main(String args[]) {
+        Overlap o = new Overlap();
+
+        int[][] input = {{1,2}, {5,6},{1,5},{7,8},{1,6}};
+
+        Set<Integer> s = o.overlap(input);
+
+        System.err.println(s);
+    }
+}
