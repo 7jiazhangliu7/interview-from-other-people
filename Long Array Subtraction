@@ -1,0 +1,86 @@
+/**
+ * Created by jiazhangliu on 5/18/15.
+ */
+public class LongSubtraction {
+    // return num1 - num2
+    public int longSubtraction(int[] num1, int[] num2) {
+        if(num1 == null || num2 == null || num1.length == 0 || num2.length == 0) return Integer.MIN_VALUE;
+
+        int[] result;
+
+        boolean isNeg = false;
+        if(num1.length < num2.length) {
+            isNeg = true;
+        } else if (num1.length > num2.length) {
+            isNeg = false;
+        } else {
+            for(int i = 0; i < num1.length; i++) {
+                if(num1[i] < num2[i]) {
+                    isNeg = true;
+                } else if (num1[i] > num2[i]) {
+                    isNeg = false;
+                } else {
+                    if(i == num1.length-1) {
+                        return Integer.MIN_VALUE;
+                    }
+                    continue;
+                }
+            }
+        }
+
+        if(isNeg) {
+            for(int i = 0; i < num1.length; i++) {
+                num2[i] -= num1[i];
+            }
+            result = num2;
+        } else {
+            for(int i = 0; i < num2.length; i++) {
+                num1[i] -= num2[i];
+            }
+            result = num1;
+        }
+
+        for(int i = 0; i < result.length; i++) {
+            if(result[i] < 0) {
+                result[i] += 10;
+                if(i <= result.length-2) {
+                    result[i+1] -= 1;
+                }
+            } else {
+                continue;
+            }
+        }
+
+        int value = 0;
+        int multiplier = 1;
+        for(int i = 0; i < result.length; i++) {
+            value += multiplier * result[i];
+            multiplier *= 10;
+        }
+
+        return isNeg == true ? -1*value : value;
+    }
+
+    public int toDec(int[] input) {
+        int value = 0;
+        int multiplier = 1;
+        for(int i = 0; i < input.length; i++) {
+            value += multiplier * input[i];
+            multiplier *= 10;
+        }
+        return value;
+    }
+
+    public static void main(String args[]) {
+        LongSubtraction ls = new LongSubtraction();
+        int[] num1 = {1,0,0,0,1};
+        int[] num2 = {0,0,0,1};
+        int[] tmp = {1,0,0,0,1};
+
+        int result = ls.longSubtraction(num1,num2);
+
+        System.err.println("num1 - num2: " + ls.toDec(tmp) + " - " + ls.toDec(num2) + " = " + (ls.toDec(tmp)-ls.toDec(num2)));
+        System.err.println(result);
+    }
+
+}
