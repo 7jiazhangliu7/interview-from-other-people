@@ -1,0 +1,43 @@
+//http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=113455&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3086%5D%5Bvalue%5D%3D5%26searchoption%5B3086%5D%5Btype%5D%3Dradio%26searchoption%5B3046%5D%5Bvalue%5D%3D1%26searchoption%5B3046%5D%5Btype%5D%3Dradio%26sortid%3D311
+
+白人秃顶男。
+给你一个List<String>,以及一个String alphabet，让你给这个list按照alphabet来排序。
+follow up是这个list巨大，比如1TB数据，怎么办
+
+import java.util.*;
+
+class Solution {
+    public List<String> sortString(List<String> alphabet, List<String> list) {
+        Collections.sort(list, new Comparator<String>() {
+            public int compare(String s1, String s2) {
+                String s1F = s1.toLowerCase().charAt(0)+"";
+                String s2F = s2.toLowerCase().charAt(0)+"";
+
+                int index1 = alphabet.indexOf(s1F);
+                int index2 = alphabet.indexOf(s2F);
+
+                return index1-index2;
+            }
+        });
+
+        return list;
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        List<String> alphabet = new LinkedList<String>();
+        List<String> list = new LinkedList<String>();
+
+        for(int i = 25; i>= 0; i--) {
+            alphabet.add("" + (char) ('a'+i));
+        }
+
+        list.add("al");list.add("bl");list.add("cl");list.add("dl");list.add("el");
+        list.add("fl");list.add("Gl");list.add("Hl");list.add("il");list.add("jl");
+        list.add("kl");list.add("ll");list.add("ml");list.add("nl");list.add("ol");
+        list.add("pl");list.add("ql");list.add("rl");list.add("sl");list.add("tl");
+
+        System.err.println(s.sortString(alphabet,list));
+    }
+}
