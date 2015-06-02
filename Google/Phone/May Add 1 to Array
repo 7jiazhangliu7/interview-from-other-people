@@ -1,0 +1,45 @@
+import java.util.*;
+
+class Solution {
+    public int[] add1(int[] array) {
+        if(array == null || array.length == 0) {
+            return array;
+        }
+
+        int carry = 1;
+
+        for(int i = array.length-1; i >= 0; i--) {
+            int sum = array[i] + carry;
+            array[i] = sum % 10;
+            carry = sum / 10;
+
+            if(carry == 0) return array;
+        }
+
+        if(carry == 1) {
+            int[] result = new int[array.length+1];
+            result[0] = 1;
+
+            for(int i = 1; i < result.length; i++) {
+                result[i] = array[i-1];
+            }
+            return result;
+        } else {
+            return array;
+        }
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+        int[] array = {9,9,9,9};
+
+        int[] result = s.add1(array);
+
+        for(Integer i : result) {
+            System.err.print(i);
+        }
+
+
+    }
+
+}
