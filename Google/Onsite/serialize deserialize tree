@@ -1,0 +1,120 @@
+/**
+ * Definition of TreeNode:
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left, right;
+ *     public TreeNode(int val) {
+ *         this.val = val;
+ *         this.left = this.right = null;
+ *     }
+ * }
+ */
+class Solution {
+    /**
+     * This method will be invoked first, you should design your own algorithm 
+     * to serialize a binary tree which denote by a root node to a string which
+     * can be easily deserialized by your own "deserialize" method later.
+     */
+    
+    public String serialize(TreeNode root) {
+        // write your code here
+        if(root == null) return "";
+        StringBuffer sb = new StringBuffer();
+        List<TreeNode> list = new LinkedList<TreeNode>();
+
+        list.add(root);
+
+        while(!list.isEmpty()) {
+            TreeNode node = list.remove(0);
+
+            if(node.val != Integer.MIN_VALUE) {
+                if(node.left != null) {
+                    list.add(node.left);
+                } else if(node.left == null){
+                    list.add(new TreeNode(Integer.MIN_VALUE));
+                }
+
+                if(node.right != null) {
+                    list.add(node.right);
+                } else if(node.right == null){
+                    list.add(new TreeNode(Integer.MIN_VALUE));
+                }
+            }
+
+            if(node.val == Integer.MIN_VALUE) {
+                sb.append("#").append(",");
+            } else {
+                sb.append(node.val).append(",");
+            }
+        }
+        int index = sb.length()-1;
+        for(int i = sb.length()-1; i >= 0; i--) {
+            if(sb.charAt(i) == ',' || sb.charAt(i) == '#') {
+                index--;
+            } else {
+                break;
+            }
+        }
+
+        return sb.toString().substring(0,index+1);
+    }
+    
+    /**
+     * This method will be invoked second, the argument data is what exactly
+     * you serialized at method "serialize", that means the data is not given by
+     * system, it's given by your own serialize method. So the format of data is
+     * designed by yourself, and deserialize it here as you serialize it in 
+     * "serialize" method.
+     */
+    public TreeNode deserialize(String serialized) {
+        // write your code here
+        if(serialized == null || serialized.length() == 0) {
+            return null;
+        }
+        
+        String[] array = serialized.split(",");
+        List<String> charList = new ArrayList<String>();
+        for(String c : array) {
+            if(!c.equals(",")) {
+                charList.add(c);
+            }
+        }
+        
+        int i = 1;
+        while(i < charList.size()) {
+            if(charList.get(i).equals("#")) {
+                if(i*2+1 <= charList.size()-1)
+                    charList.add(i*2+1, "#");
+                if(i*2+2 <= charList.size()-1)
+                    charList.add(i*2+2, "#");
+            }
+            i++;
+        }
+        TreeNode root = new TreeNode(toInt(array[0]));
+
+        root.left = helper(charList, 1);
+        root.right = helper(charList, 2);
+
+        return root;
+        
+    }
+    
+    public int toInt(String input) {
+        return Integer.parseInt(input);
+    }
+    
+    public TreeNode helper(List<String> charList, int index) {
+        if(charList == null || charList.size() == 0) return null;
+
+        if(index > charList.size()) return null;
+
+        if(!charList.get(index).equals("#")) {
+            TreeNode n = new TreeNode(toInt(charList.get(index)));
+            n.left = index*2+1 > charList.size()-1 ? null : helper(charList, index*2+1);
+            n.right = index*2+2 > charList.size()-1 ? null : helper(charList, index*2+2);
+            return n;
+        } 
+        return null;
+    }
+}
+
