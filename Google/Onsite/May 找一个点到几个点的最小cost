@@ -1,3 +1,105 @@
 白人。你需要建一个火星探测基地，地图上有好几个target location是你需要每天都去探测一遍的。另外地图上有些地方有障碍，不能通过。
 让找到一个最合适的location可以minimize去所有target location的cost。自己设计这个题目的表示方法以及给出解法
 
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * Created by jiazhangliu on 6/1/15.
+ */
+public class Solution {
+    public int findLocation(int[][] map) {
+        if(map == null || map.length == 0 || map[0].length == 0 ) {
+            return -1;
+        }
+
+        return helper(2,1,map);
+    }
+
+    public int helper(int x, int y, int[][] map) {
+        List<Points> list = new LinkedList<Points>();
+        Points source = new Points(0,0);
+        source.distance = 0;
+        list.add(source);
+
+        while(!list.isEmpty()) {
+            Points p = list.remove(0);
+            System.err.println(p.x + " " + p.y);
+            if(p.x == x && p.y == y) {
+                return p.distance;
+            }
+
+            if(p.x < map.length && p.y < map[0].length) {
+                if(p.y + 1 < map[0].length && map[p.x][p.y+1] != -1) {
+                    Points newP = new Points(p.x,p.y+1);
+                    newP.distance = p.distance+1;
+                    map[p.x][p.y+1] = map[p.x][p.y]+1;
+                    list.add(newP);
+                }
+
+                if(p.y - 1 >= 0 && map[p.x][p.y-1] != -1) {
+                    Points newP = new Points(p.x,p.y-1);
+                    newP.distance = p.distance+1;
+                    map[p.x][p.y-1] = map[p.x][p.y]+1;
+                    list.add(newP);
+                }
+
+                if(p.x + 1 < map.length && map[p.x+1][p.y] != -1) {
+                    Points newP = new Points(p.x+1,p.y);
+                    newP.distance = p.distance+1;
+                    map[p.x+1][p.y] = map[p.x][p.y]+1;
+                    list.add(newP);
+                }
+
+                if(p.x - 1 >= 0 && map[p.x-1][p.y] != -1) {
+                    Points newP = new Points(p.x-1,p.y);
+                    newP.distance = p.distance+1;
+                    map[p.x-1][p.y] = map[p.x][p.y]+1;
+                    list.add(newP);
+                }
+            }
+        }
+
+        return -1;
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        /*  00DX0X
+            0000X0
+            XX000D
+            0000XX
+            XX0000
+            0XDXX0
+            XX0000
+         */
+
+//        int[][] map = { {-1,-2,-1,Integer.MAX_VALUE,-1,Integer.MAX_VALUE},
+//                        {-1,-1,-1,-1,Integer.MAX_VALUE,-1},
+//                        {Integer.MAX_VALUE,Integer.MAX_VALUE,-1,-1,-1,-2},
+//                        {-1,-1,-1,-1,Integer.MAX_VALUE,Integer.MAX_VALUE},
+//                        {Integer.MAX_VALUE,Integer.MAX_VALUE,-1,-1,-1,-1},
+//                        {-1,Integer.MAX_VALUE,-2,Integer.MAX_VALUE,Integer.MAX_VALUE,-1},
+//                        {Integer.MAX_VALUE,Integer.MAX_VALUE,-1,-1,-1,-1}};
+        int[][] map = {{0,0,0},{-1,-1,0},{-1,1,0}};
+
+        int result = s.findLocation(map);
+
+
+        System.err.println(result);
+
+    }
+
+    static class Points{
+        int x;
+        int y;
+        int distance;
+        public Points(int x, int y) {
+            this.x = x;
+            this.y = y;
+            distance = -1;
+        }
+    }
+
+}
