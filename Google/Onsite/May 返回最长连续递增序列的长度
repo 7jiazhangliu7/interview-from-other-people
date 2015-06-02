@@ -1,3 +1,56 @@
 返回最长连续递增序列的长度。
 比如4 5 1 2 3返回3，因为123最长。1 2 4 3 5返回2，因为12最长。follow up是把list换成二叉树。再follow up是把树换成图
 
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * Created by jiazhangliu on 6/1/15.
+ */
+public class Solution {
+    public int longestIncreasingSequence(int[] input) {
+        if(input == null || input.length == 0) {
+            return -1;
+        }
+
+        int result = Integer.MIN_VALUE;
+
+        int start = 0;
+        int temp = start;
+        int cur = 1;
+        while(cur < input.length) {
+            while (cur < input.length && input[start] <= input[cur]) {
+                start++;
+                cur++;
+            }
+            result = Math.max(result, cur - temp);
+            start++;
+            cur++;
+            temp = start;
+        }
+
+        return result;
+    }
+
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        int[] input = {1,2,3,6,5,4,6,4,3,2};
+
+        System.err.println(s.longestIncreasingSequence(input));
+
+    }
+
+    static class Points{
+        int x;
+        int y;
+        int distance;
+        public Points(int x, int y) {
+            this.x = x;
+            this.y = y;
+            distance = -1;
+        }
+    }
+
+}
