@@ -1,0 +1,74 @@
+判断一个数组是不是另一个数组的子数组
+
+import java.util.*;
+
+class Solution {
+    public boolean isSubSetNoOrder(int[] main, int[] subset) {
+        if(main == null || subset == null) return false;
+        if(main.length == 0) return false;
+        if(subset.length == 0) return true;
+
+        HashSet<Integer> hs = new HashSet<Integer>();
+
+        for(Integer i : main) {
+            hs.add(i);
+        }
+
+        for(Integer i : subset) {
+            if(!hs.contains(i)) {
+                return false;
+            } else {
+                hs.remove(i); //!!!!!
+            }
+        }
+
+        return true;
+    }
+
+    public boolean isSubSetWithOrder(int[] main, int[] subset) {
+        if(main == null || subset == null) return false;
+        if(main.length == 0) return false;
+        if(subset.length == 0) return true;
+
+        int length = 0;
+
+        for(int i = 0; i < main.length; i++) {
+            if(i <= main.length - subset.length && main[i] == subset[0]) {
+                for(int j = 0; j < subset.length; j++) {
+                    if(main[i + length] != subset[j]) {
+                        break;
+                    } else {
+                        length++;
+                    }
+
+                    if(j == subset.length-1) {
+                        return true;
+                    }
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        int[] main = {1, 2, 3, 4, 5, 6, 7, 8};
+        int[] subset = {8,7,6,5,4,3,2,1};
+
+        System.err.println(s.isSubSetNoOrder(main, subset));
+        System.err.print(s.isSubSetWithOrder(main, subset));
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        public TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
+}
