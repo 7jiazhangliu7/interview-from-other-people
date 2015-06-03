@@ -1,0 +1,38 @@
+Suppose I have an experiment where I need to find out how many
+cards are required to stop an explosion. How can I find the right
+number?
+
+import java.util.*;
+
+class Solution {
+    public int numberNeeded(double target, int upperBound) {
+        if(target < 0) {
+            return -1;
+        }
+
+        int start = 0, end = upperBound;
+
+        while(start+1 < end) {
+            int mid = (start + end) / 2;
+
+            if(mid > target) {
+                if(mid-target < 1.0) {
+                    return mid;
+                }
+
+                end = mid;
+            } else if (mid < target) {
+                start = mid;
+            } else {
+                return mid;
+            }
+        }
+        return -1;
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        System.err.println(s.numberNeeded(33.2, 10000));
+    }
+}
