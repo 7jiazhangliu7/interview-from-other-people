@@ -1,0 +1,54 @@
+//给一个数组，把所有0放到数组最后，return有多少个零
+
+import java.util.*;
+
+class Solution {
+    public int putZeroAtEnd(int[] array) {
+        if(array == null || array.length == 0) {
+            return -1;
+        }
+
+        int start = 0, end = array.length-1;
+        int zeroCounter = 0;
+        while(start < end) {
+            while(array[start] != 0) {
+                start++;
+            }
+            if(start != end)
+                zeroCounter++;
+
+            while(array[end] == 0) {
+                end--;
+                zeroCounter++;
+            }
+
+            int temp = array[start];
+            array[start] = array[end];
+            array[end] = temp;
+
+            start++;
+            end--;
+        }
+
+        return zeroCounter;
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        int[] array = {1,0,2,1,5,4,0,3,0,0,0,0,0};
+
+        System.err.println(s.putZeroAtEnd(array));
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        public TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
+}
