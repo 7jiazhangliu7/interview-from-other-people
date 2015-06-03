@@ -1,0 +1,63 @@
+//给了一棵二叉搜索树和一个数n返回树中的第n个元素
+
+import java.util.*;
+
+class Solution {
+    static List<Integer> list = new LinkedList<>();
+    public int findNthNode(TreeNode root, int n) {
+        if(root == null || n < 0) return -1;
+
+        int index = 1;
+
+        Stack<TreeNode> stack = new Stack<TreeNode>();
+
+        TreeNode node = root;
+        while(node != null) {
+            stack.push(node);
+            node = node.left;
+        }
+
+        while(!stack.isEmpty()) {
+            TreeNode tn = stack.pop();
+            list.add(tn.val);
+            if(index == n) return tn.val;
+            index++;
+            tn = tn.right;
+
+
+            while(tn != null) {
+                stack.push(tn);
+                tn = tn.left;
+            }
+
+        }
+
+        return -1;
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        TreeNode root = new TreeNode(1);
+        TreeNode n1 = new TreeNode(2);
+        TreeNode n2 = new TreeNode(3);
+        TreeNode n3 = new TreeNode(4);
+        TreeNode n4 = new TreeNode(5);
+        root.left = n1; root.right = n2;
+        n1.left = n3; n2.right = n4;
+
+        System.err.println(s.findNthNode(root, 3));
+        System.err.println(list);
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        public TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
+}
