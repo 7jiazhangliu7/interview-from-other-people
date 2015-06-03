@@ -1,0 +1,51 @@
+1->2->3->4
+5->6
+
+=> 1->5->2->6->3->4
+
+import java.util.*;
+
+class Solution {
+    public ListNode interleave(ListNode p, ListNode q) {
+        if(p == null && q == null) return null;
+        if(q == null) return p;
+        if(p == null) return q;
+
+        q.next = interleave(p.next, q.next);
+        p.next = q;
+
+        return p;
+    }
+
+    public void print(ListNode head) {
+        if(head == null) return;
+        System.err.println(head.val);
+        print(head.next);
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        ListNode head = new ListNode(1);
+        ListNode n1 = new ListNode(2);
+        ListNode n2 = new ListNode(3);
+        ListNode n3 = new ListNode(4);
+        head.next = n1; n1.next = n2; n2.next = n3;
+
+        ListNode head1 = new ListNode(5);
+        ListNode n4 = new ListNode(6);
+        head1.next = n4;
+
+        s.print(s.interleave(head, head1));
+    }
+
+    static class ListNode {
+        int val;
+        ListNode next;
+
+        public ListNode(int val) {
+            this.val = val;
+        }
+    }
+
+}
