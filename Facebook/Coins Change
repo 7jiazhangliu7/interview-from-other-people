@@ -1,0 +1,34 @@
+import java.util.*;
+
+class Solution {
+    public List<List<Integer>> coinChange(int[] coins, int sum) {
+        List<List<Integer>> result = new LinkedList<List<Integer>>();
+        if(coins == null || coins.length == 0) return result;
+        Arrays.sort(coins);
+        helper(coins, sum, 0, new LinkedList<Integer>(), result);
+
+        return result;
+    }
+
+    public void helper(int[] coins, int sum, int start, List<Integer> list, List<List<Integer>> result) {
+        if(sum == 0) {
+            result.add(new LinkedList<Integer>(list));
+            return;
+        } else if(sum < 0) return;
+
+        for(int i = start; i < coins.length; i++) {
+
+            list.add(coins[i]);
+            helper(coins, sum-coins[i], i, list, result);
+            list.remove(list.size()-1);
+        }
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        int[] main = {2,3,5};
+
+        System.err.println(s.coinChange(main, 10));
+    }
+}
