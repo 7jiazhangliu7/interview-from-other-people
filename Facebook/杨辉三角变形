@@ -1,0 +1,48 @@
+public class Solution {
+   public void printTriangle (int n) {
+        if(n < 0) return;
+
+        int i = 0;
+        int[] curr = new int[n];
+        int[] next = new int[n];
+        curr[i] = 1;
+
+        while(i < n) {
+            next[0] = 1;
+            System.err.print(next[0] + " ");
+            for(int j = 1; j < i; j++) {
+                next[j] = curr[j] + curr[j-1];
+                System.err.print(next[j] + " ");
+            }
+            next[i++] = 1;
+            if(i != 1)
+                System.err.print(next[i-1] + " ");
+            System.err.println();
+            curr = next;
+            next = new int[n];
+        }
+
+       while(i > 1) {
+
+           for(int k = 1; k < curr.length-1; k++) {
+               curr[k] = curr[k] - curr[k-1];
+           }
+
+           for (int j = 0; j < curr.length-1; j++) {
+               if(curr[j] != 0)
+                    System.err.print(curr[j] + " ");
+               else {
+                   break;
+               }
+           }
+           System.err.println();
+           i--;
+       }
+   }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+
+        s.printTriangle(6); // 5
+    }
+}
