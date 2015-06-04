@@ -1,0 +1,90 @@
+给一堆meeting，问能不能参加所有meeting
+
+follow up： 用最少房间安排
+
+import java.util.*;
+
+class Solution {
+    public boolean canAttendMeeting (Meetings[] list) {
+        if(list == null || list.length == 0) return false;
+
+        Arrays.sort(list, new timeComparator());
+
+        for(int i = 0; i < list.length - 1; i++) {
+            if(list[i].end > list[i+1].start) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public int leastRoomsNeeded(Meetings[] list) {
+        int index = 0;
+        if(list == null || list.length == 0) return 0;
+        List<List<Meetings>> result = new LinkedList<List<Meetings>>();
+        List<Meetings> temp = new LinkedList<Meetings>();
+        temp.add(list[0]);
+        index++;
+        result.add(new LinkedList<>(temp));
+
+        Arrays.sort(list, new timeComparator());
+
+        PriorityQueue<Meetings> pq = new PriorityQueue<Meetings>(list.length, new Comparator<Meetings>() {
+            @Override
+            public int compare(Meetings o1, Meetings o2) {
+                return -1*(o1.end - o2.end);
+            }
+        });
+        pq.add(list[0]);
+
+        for(int i = 1; i < list.length; i++) {
+            Iterator<Meetings> itr = pq.iterator();
+            while(itr.hasNext()) {
+                if(list[i].start < itr.next().end) {
+                    if(!itr.hasNext()) {
+                        index++;
+                    }
+                    continue;
+                } else {
+                    break;
+                }
+
+
+            }
+        }
+
+        return index;
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+        Meetings m1 = new Meetings(1,4);
+        Meetings m2 = new Meetings(3,4);
+        Meetings m3 = new Meetings(3,5);
+        Meetings m4 = new Meetings(1,6);
+        Meetings m5 = new Meetings(2,7);
+        Meetings[] list = {m1,m2,m3,m4,m5};
+
+        System.err.println(s.canAttendMeeting(list));
+        System.err.println(s.leastRoomsNeeded(list));
+    }
+
+    static class Meetings {
+        int start;
+        int end;
+        int index = -1;
+
+        public Meetings(int start, int end) {
+            this.start = start;
+            this.end = end;
+        }
+    }
+
+    public class timeComparator implements Comparator<Meetings> {
+        public int compare(Meetings o1, Meetings o2) {
+            return o1.start - o2.start;
+        }
+    }
+
+}
