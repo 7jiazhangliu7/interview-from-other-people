@@ -1,0 +1,65 @@
+import java.util.*;
+
+class Solution {
+    public List<Double> averageOfEachLevel (TreeNode root) {
+        List<Double> result = new LinkedList<Double>();
+        if(root == null) return result;
+
+        List<TreeNode> curr = new LinkedList<TreeNode>();
+        List<TreeNode> next = new LinkedList<TreeNode>();
+
+        curr.add(root);
+        result.add((double)root.val);
+        while(!curr.isEmpty()) {
+            TreeNode node = curr.remove(0);
+
+            if(node.left != null) {
+                next.add(node.left);
+            }
+
+            if(node.right != null) {
+                next.add(node.right);
+            }
+
+            if(curr.isEmpty()) {
+                int sum = 0;
+                for(TreeNode n : next) {
+                    sum += n.val;
+                }
+
+                result.add((double)sum / next.size());
+
+                curr = next;
+                next = new LinkedList<TreeNode>();
+            }
+        }
+
+        return result.subList(0,result.size()-1);
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        TreeNode root = new TreeNode(1);
+        TreeNode n1 = new TreeNode(2);
+        TreeNode n2 = new TreeNode(3);
+        TreeNode n3 = new TreeNode(4);
+        TreeNode n4 = new TreeNode(5);
+        TreeNode n5 = new TreeNode(6);
+
+        root.left = n1;root.right = n2;
+        n1.left = n3;n1.right = n4;n2.right = n5;
+
+        System.err.println(s.averageOfEachLevel(root));
+    }
+
+    static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        public TreeNode(int val) {
+            this.val = val;
+        }
+    }
+}
