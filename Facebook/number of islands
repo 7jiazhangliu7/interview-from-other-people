@@ -1,0 +1,43 @@
+public class Solution {
+    public int numberOfIslands(char[][] m) {
+        int count = 0;
+        if (m == null || m.length == 0 || m[0].length == 0) {
+            return count;
+        }
+
+        for (int i = 0; i < m.length; i++) {
+            for (int j = 0; j < m[0].length; j++) {
+                if (m[i][j] == 'X') {
+                    count++;
+                    helper(m, i, j);
+                }
+            }
+        }
+        return count;
+    }
+
+    private void helper(char[][] m, int x, int y) {
+        if (x < 0 || y < 0 || x >= m.length || y >= m[0].length || m[x][y] == 'L' || m[x][y] == 'O') {
+            return;
+        }
+        m[x][y] = 'L';
+        helper(m, x + 1, y);
+        helper(m, x - 1, y);
+        helper(m, x, y + 1);
+        helper(m, x, y - 1);
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+        char[][] m = {
+                {'X', 'X', 'X', 'O', 'O'},
+                {'O', 'O', 'O', 'X', 'X'},
+                {'O', 'O', 'O', 'X', 'X'},
+                {'O', 'O', 'X', 'O', 'O'},
+                {'O', 'O', 'O', 'X', 'X'},
+                {'X', 'O', 'X', 'O', 'O'},
+                {'X', 'X', 'X', 'O', 'O'}
+            };
+        System.out.println(s.numberOfIslands(m)); // 5
+    }
+}
