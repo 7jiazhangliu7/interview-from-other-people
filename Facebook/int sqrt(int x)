@@ -1,12 +1,13 @@
 public class Solution {
+
     public int mySqrt(int num) {
         if(num <= 0) return 0;
         
-        long t = num;
-        long num1 = num;
+        long t = num;//需要使用long， 不然会越界
+        long num1 = num;//需要使用long， 不然会越界
         
         while (t != 0 && t - num1/t > 0) {
-            t = (num1/t + t) / 2;
+            t = (num1/t + t) / 2;//需要使用long， 不然会越界
         }
         
         return (int)t;
