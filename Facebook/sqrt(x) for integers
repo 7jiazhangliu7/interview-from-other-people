@@ -1,0 +1,14 @@
+public class Solution {
+    public int mySqrt(int num) {
+        if(num <= 0) return 0;
+        
+        long t = num;
+        long num1 = num;
+        
+        while (t != 0 && t - num1/t > 0) {
+            t = (num1/t + t) / 2;
+        }
+        
+        return (int)t;
+    }
+}
