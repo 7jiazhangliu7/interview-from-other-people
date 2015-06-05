@@ -1,0 +1,33 @@
+public class Solution {
+    public List<String> anagrams(String[] strs) {
+        List<String> result = new LinkedList<String>();
+        HashMap<String, LinkedList<String>> hm = new HashMap<String, LinkedList<String>>();
+        if(strs == null || strs.length == 0) {
+            return result;
+        }
+        
+        for(String s : strs) {
+            char[] c = s.toCharArray();
+            Arrays.sort(c);
+            String str = new String(c);
+            
+            if(hm.containsKey(str)) {
+                hm.get(str).add(s);
+            } else {
+                LinkedList<String> l = new LinkedList<String>();
+                l.add(s);
+                hm.put(str, l);
+            }
+        }
+        
+        for(String s : hm.keySet()) {
+            if(hm.get(s).size() > 1) {
+                for(String ss : hm.get(s)) {
+                    result.add(ss);
+                }
+            }
+        }
+        
+        return result;
+    }
+}
