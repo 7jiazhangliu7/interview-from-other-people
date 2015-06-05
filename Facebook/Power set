@@ -1,0 +1,35 @@
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Solution {
+    public List<List<Integer>> powerSet(List<Integer> set) {
+        List<List<Integer>> result = new LinkedList<List<Integer>>();
+
+        if(set == null || set.size() == 0) return result;
+
+        helper(set, 0, result, new LinkedList<Integer>());
+
+        return result;
+    }
+
+    public void helper(List<Integer> set, int index, List<List<Integer>> result, List<Integer> temp) {
+
+        result.add(new LinkedList<Integer>(temp));
+
+        for(int i = index; i < set.size(); i++) {
+            temp.add(set.get(i));
+            helper(set, i+1, result, temp);
+            temp.remove(temp.size()-1);
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+
+        List<Integer> set = new LinkedList<Integer>();
+        set.add(1);set.add(2);set.add(3);set.add(4);
+
+        System.err.println(s.powerSet(set));
+    }
+}
