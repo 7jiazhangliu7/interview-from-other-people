@@ -4,6 +4,7 @@ public class Solution {
                                 {'p','q','r','s'}, {'t','u','v'}, {'w','x','y','z'}
                             };
     
+    //O(m^n) n = digits.length(); m = average length of each map[i]
     
     public ArrayList<String> letterCombinations(String digits) {
         ArrayList<String> result = new ArrayList<String>();
