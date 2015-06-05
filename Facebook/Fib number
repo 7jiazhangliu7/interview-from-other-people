@@ -1,0 +1,45 @@
+import java.util.HashSet;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Solution {
+    public void fibOnSpace(int n) {
+        if(n < 0) return;
+
+        int[] fib = new int[n+1];
+
+        fib[0] = 0;fib[1] = 1;fib[2] = 1;
+        System.err.print(fib[0] + " ");
+        System.err.print(fib[1] + " ");
+        System.err.print(fib[2] + " ");
+        for(int i = 3; i <= n; i++) {
+            fib[i] = fib[i-1] + fib[i-2];
+            System.err.print(fib[i] + " ");
+        }
+    }
+
+    public void fibO1Space(int n) {
+        if(n < 0) return;
+
+        int fib0 = 0;
+        int fib1 = 1;
+        int fib2;
+
+        System.err.print(fib0 + " ");
+        System.err.print(fib1 + " ");
+        for(int i = 2; i <= n; i++) {
+            fib2 = fib0 + fib1;
+            System.err.print(fib2 + " ");
+            fib0 = fib1;
+            fib1 = fib2;
+        }
+    }
+
+    public static void main(String[] args) {
+        Solution s = new Solution();
+
+        s.fibOnSpace(10);
+        System.err.println();
+        s.fibO1Space(10);
+    }
+}
