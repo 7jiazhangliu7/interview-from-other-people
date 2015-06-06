@@ -1,0 +1,27 @@
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * Created by jiazhangliu on 6/1/15.
+ */
+public class Solution {
+    public int numberOfOnes(int number) {
+        if(number < 0) return -1;
+
+        int counter = 0;
+
+        while(number > 0) {
+            if((number & 1) == 1) counter++;
+            number >>= 1;
+        }
+        return counter;
+    }
+
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+        int num = (int)(Math.pow(2,15)-1);
+        System.err.println(Integer.toBinaryString(num) + " " + s.numberOfOnes(num));
+
+    }
+}
