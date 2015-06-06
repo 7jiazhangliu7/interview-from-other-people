@@ -1,0 +1,51 @@
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ * Created by jiazhangliu on 6/1/15.
+ */
+public class Solution {
+    public List<String> parse(String str) {
+        List<String> result = new LinkedList<String>();
+        if(str == null || str.length() == 0) return result;
+
+        str.trim();
+
+        int start = 0, curr = 0;
+        while(start < str.length()) {
+            if(str.charAt(curr) != '"') {
+                while(str.charAt(curr) == ' ') {
+                    curr++;
+                }
+                start = curr;
+
+                while (str.charAt(curr) != ' ') {
+                    curr++;
+                }
+                result.add(str.substring(start, curr));
+
+                while(curr < str.length() && str.charAt(curr) == ' ') {
+                    curr++;
+                }
+                start = curr;
+            } else {
+                curr++;
+                while(curr < str.length()-1 && str.charAt(curr) != '"') {
+                    curr++;
+                }
+                result.add(str.substring(start, curr+1));
+                start = curr+1;
+                curr++;
+            }
+        }
+
+        return result;
+    }
+
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        System.err.println(s.parse("I have a \"faux coat\" abc aa b c asgdshs \" asagasg asgas  ga \""));
+    }
+}
