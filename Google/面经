@@ -4,3 +4,18 @@
 国姐 出了一个数据结构题 一个用数组实现的二项堆怎么取topk 要求不能pop 不能修改堆
 白大叔 phd research撕逼
 白小哥 半coding半system design: game of life 各种扩展 忘了具体是啥了 只记得是优化memory usage
+
+Word break
+
+第1轮白人，很nice题目是给你一个string让你返回以这个string为前缀的最短的palindrome string讨论了下，有了思路解决了。
+第2轮烙印，先问了下最challange的project大概5分钟然后上题不停的在电脑上打字。题目find local min in a array就是一个元素比它左右的元素都小让你找到一个输出。条件是array unsorted相邻元素不重复，先给了O(n)的方法，然后在他提示下想出log(n)的方法。
+第3轮中国大叔，比较nice感觉放水题目给你一个int n把它转换成base为k的数string输出这么简单还出了一个bug。。。不过提示下改了。然后给你看代码让你改错感觉是java多线程同步之类的错
+午饭跟一个白人小哥一次吃吹了吹牛
+第4轮烙印，居然问了第2轮一样的题目。。只不过没有相邻元素不相同的条件。让你证明为什么找不到比O(n)更好的算法。做完还有时间给了另外一题，给你一个String Array例如abcd abdd都可以简写为a4d让你判断Array里面有没有这样的String用hashmap很简单。
+第5轮一个老白资深程序员吧，估计我就是挂在他手里。这轮本来时间就不够他还要去找水笔拿水估计只做了30分钟结果没写完思路是有了不过不是最优解。题目是给你一个String 里面有a-z 0-9可以转换成一个m*n的char矩阵，然后给你一个String 让你在m*n矩阵里面寻找s并且输出寻找指针移动的过程（过程不唯一随便输出一个）。
+Ex：
+s e c
+t b d
+a r d
+如果让你找star 你就输出“ddl” move down down right
+我用dfs穷举法做每次4个方向做穷举貌似他不满意还找出我一个bug。。。
