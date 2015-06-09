@@ -1,0 +1,6 @@
+05/12：
+港台同胞 topk 和stream topk 没啥好说的 水题一枚
+白大叔 给两个string array 求longest common sequence 例如 A = {"A", "B", "C", "D"} B = {"D", "C", "A", "B"}, result "AB", longest means the number of string not the sum of length
+国姐 出了一个数据结构题 一个用数组实现的二项堆怎么取topk 要求不能pop 不能修改堆
+白大叔 phd research撕逼
+白小哥 半coding半system design: game of life 各种扩展 忘了具体是啥了 只记得是优化memory usage
