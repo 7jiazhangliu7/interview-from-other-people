@@ -1,28 +1,26 @@
-大概谈谈Amazon onsite的感觉造福后人。. 涓€浜�-涓夊垎-鍦帮紝鐙鍙戝竷
-首先我觉得Amazon面试算法题目不难，基本就是leetcode简单和中等难度的题目。重点要准备简历，behavior问题（非常重要）和OOP Design的题目。
-问OOP的时候要多跟面试官交流。问清楚各种假设和功能要求。而且OOP Design很有可能不要写大部分细节代码只要跟面试官讨论下接口和具体框架明白各种design的优缺点就可以。
+首先我觉得Amazon面试算法题目不难，基本就是leetcode简单和中等难度的题目。
+重点要准备简历，behavior问题（非常重要）和OOP Design的题目。
+问OOP的时候要多跟面试官交流。问清楚各种假设和功能要求。
+而且OOP Design很有可能不要写大部分细节代码只要跟面试官讨论下接口和具体框架明白各种design的优缺点就可以。
 算法题最好先讲出方法，各种边界条件最好问，最后基本都会问到给出test case测试你的代码。
 我面试了两个组一天5轮。
+
 第一轮 白人问behavior问题。一道OOP Design关于class schedule，一道leetcode算法题 
 第二轮 hire manager白人。问简历问工作projects，大量behavior问题，一道leetcode算法题 
 HR中午吃饭谈谈公司福利之类。
-第三轮 hire manager烙印。纯behavior+简历问题。. 1point3acres.com/bbs
+第三轮 hire manager烙印。纯behavior+简历问题。
 第四轮 bar raiser烙印。少量简历问题，OOP Design关于lastest 3 view Items by customer，一道leetcode算法题
 第五轮 白人+中国MM shadow 简历 why Amazon， 少量behavior，算法题是一道我没见过的也不知道正确解法。
 给你一个字典一个，map<Character, Integer>存每个字母的权，输入是一个List<Character>（可能有重复）
 让你求这些字母求可以组成最大权数的word list（List<String>）
 
-
-第一轮 电梯设计（事先没准备设计题目，答得很不好）.鏈枃鍘熷垱鑷�1point3acres璁哄潧
+第一轮 电梯设计（事先没准备设计题目，答得很不好）
 第二轮 leetcode那个letter combination的变形，然后让输出valid word。我说的把所有单词都存入hashmap，然后查找是否valid
 第三轮 graph从一个source，然后输出指定的距离的node，无向图。我写的bfs level，中间卡了一下，想了半天才写出来level 怎么做。
 第四轮 两个数组，一个大，一个小。都是排好序的。然后大数组后面有几个空位置和小数组长度相等，排好序的数组应该都在大数组上面。不要用额外的space。
 
 第一轮，binary tree里给个node，找出比他大的下一个node。
-
 第二轮，从head，一次改一个字母，要求改完仍是一个有意义的词，找path。这轮基本都在谈思路，感觉不是很好，我用BFS的。
-
-第三轮，给一串没空格的字符串，判断是不是一句话，之后会叫你返回加上空格后的那句话。. 1point 3acres 璁哄潧
-
+第三轮，给一串没空格的字符串，判断是不是一句话，之后会叫你返回加上空格后的那句话。
 第四轮，给一个int的array，值代表高度。求这个东西能储存多少水。面到这轮脑子都锈掉了，第一个解法是错的，写完第二个讲完面试官说了个good就结束了。。。
 
