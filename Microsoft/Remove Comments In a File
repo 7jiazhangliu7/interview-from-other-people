@@ -1,0 +1,72 @@
+import java.io.*;
+//import java.util.*;
+
+public class Solution {
+    public void removeComments(File sourceCode) {
+        if(sourceCode == null) return;
+
+        FileInputStream fis = null;
+        BufferedInputStream bis = null;
+        DataInputStream dis = null;
+//hahahaha
+        /*
+        *
+        * * asasag
+         */
+        /*asasg*/
+        /******/
+        try {
+            fis = new FileInputStream(sourceCode);
+
+            bis = new BufferedInputStream(fis);
+            dis = new DataInputStream(bis);
+            String line = "";
+            while (dis.available() != 0) {
+                String l = dis.readLine();
+                line = l.trim();
+                if(line.length() == 0) System.out.print(line);
+                if(line.length() >= 1 && line.charAt(0) == '*') continue;
+                if((line.length() >= 2)) {
+                    if ((line.charAt(0) == '/' && line.charAt(1) == '/')) {
+                        continue;
+                    }
+
+                    if ((line.charAt(0) == '/' && line.charAt(1) == '*')) {
+                        if (line.charAt(line.length() - 2) != '*' && line.charAt(line.length() - 1) != '/') {
+                            continue;
+                        } else {
+                            continue;
+                        }
+                    }
+                }
+                System.out.println(l);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                fis.close();
+                bis.close();
+                dis.close();
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+        }
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+        File sourceCode = new File("C:\\Users\\Jiazhang_Liu\\IdeaProjects\\Solution\\src\\Solution.java");
+        s.removeComments(sourceCode);
+    }
+
+    public static class TreeNode {
+        int val;
+        TreeNode left;
+        TreeNode right;
+
+        public TreeNode(int val) {
+            this.val = val;
+        }
+    }
+}
