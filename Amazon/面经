@@ -24,3 +24,31 @@ HR中午吃饭谈谈公司福利之类。
 第三轮，给一串没空格的字符串，判断是不是一句话，之后会叫你返回加上空格后的那句话。
 第四轮，给一个int的array，值代表高度。求这个东西能储存多少水。面到这轮脑子都锈掉了，第一个解法是错的，写完第二个讲完面试官说了个good就结束了。。。
 
+Coding：. 鐣欏鐢宠璁哄潧-涓€浜╀笁鍒嗗湴
+我用的java，题还是老三样，而且竟然还在左下角有提示。我的是graycode和romove vowel。看之前的帖子里的面筋足够，一次过所有case。
+graycode：
+http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=107902&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3089%5D%5Bvalue%5D%5B5%5D%3D5%26searchoption%5B3089%5D%5Btype%5D%3Dcheckbox%26searchoption%5B3046%5D%5Bvalue%5D%5B5%5D%3D5%26searchoption%5B3046%5D%5Btype%5D%3Dcheckbox%26sortid%3D311. visit 1point3acres.com for more.
+
+romove vowel：
+http://www.1point3acres.com/bbs/forum.php?mod=viewthread&tid=105773&extra=page%3D1%26filter%3Dsortid%26sortid%3D311%26searchoption%5B3089%5D%5Bvalue%5D%5B5%5D%3D5%26searchoption%5B3089%5D%5Btype%5D%3Dcheckbox%26searchoption%5B3046%5D%5Bvalue%5D%5B5%5D%3D5%26searchoption%5B3046%5D%5Btype%5D%3Dcheckbox%26sortid%3D311
+
+Reasoning Assessment ：(一定弄张字母表放着)
+大量面筋不分顺序：-google 1point3acres
+1. 3 7 13 21 _
+2. TENNIS:UDOMJR::CRICKET:____
+3. NORMAL:LAMRON::SYstem:____
+4. 2 8 5 6 8 __ 11(不太会)
+5. 一个人往右走30，左转走40，左转走50，问相对于原点方位：
+5. 一个人先往北走，再往西走10，再往南走20，发现在原点西边10，问开始往北走了多少. Waral 鍗氬鏈夋洿澶氭枃绔�,
+6. 27:24::64:__
+7.+是=，
+-是<
+=是!=
+*是>.鏈枃鍘熷垱鑷�1point3acres璁哄潧
+/是<=
+然后给了俩k-m;k/L;L+N;问个关系
+8.B比A高，B比D和E矮，B比C高，问谁最高
+9. 5个男候选人(M1,M2,M3,M4,M5)，3女候选人(W1,W2,W3)(此处出了四五题)
+最少选3男1女，选M1不选M3，选M4不选W2，然后各种问这情况OK不OK
+10. Jocob付邮费问题(地里有)
+11. 候选人问题(地里有)
