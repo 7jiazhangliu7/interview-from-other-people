@@ -1,0 +1,29 @@
+import java.util.*;
+
+public class Solution {
+    public String removeDuplicates(String str) {
+        if(str == null || str.length() <= 1) return str;
+
+        StringBuffer sb = new StringBuffer();
+
+        int start = 0, next = 1;
+
+        while(start < str.length()) {
+            while(str.charAt(start) == str.charAt(next)) {
+                next++;
+                if(next >= str.length()) break;
+            }
+
+            sb.append(str.charAt(start));
+            start = next;
+        }
+
+        return sb.toString();
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        System.err.println(s.removeDuplicates("aaabaaabbcccddd"));
+    }
+}
