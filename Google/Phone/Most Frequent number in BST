@@ -1,0 +1,68 @@
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by Jiazhang_Liu on 6/19/2015.
+ */
+public class Solution {
+    public int mostFrequentNumberInBST(TreeNode root) {
+        if(root == null) {
+            return Integer.MIN_VALUE;
+        }
+
+        List<Integer> list = new LinkedList<Integer>();
+
+        helper(root, list);
+
+        int start = 0, cur = 0, max = 0, number = Integer.MIN_VALUE;
+        while(start < list.size()) {
+            int val = list.get(cur);
+            while(cur < list.size() && list.get(cur) == val) {
+                cur++;
+            }
+
+            if(max < cur-start) number = val;
+            max = Math.max(max, cur-start);
+
+            start = cur;
+        }
+
+        return number;
+    }
+
+    public void helper(TreeNode root, List<Integer> list) {
+        if(root == null) return;
+
+        helper(root.left, list);
+        list.add(root.val);
+        helper(root.right, list);
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+        TreeNode root = new TreeNode(5);
+        TreeNode n1 = new TreeNode(3);
+        TreeNode n2 = new TreeNode(1);
+        TreeNode n3 = new TreeNode(1);
+        TreeNode n4 = new TreeNode(1);
+        TreeNode n5 = new TreeNode(5);
+        TreeNode n6 = new TreeNode(3);
+
+        root.left = n1; root.right = n5;
+        n1.left = n2; n1.right = n6;
+        n2.left = n3; n3.left = n4;
+
+        System.err.println(s.mostFrequentNumberInBST(root));
+    }
+
+    private static class TreeNode {
+        int val;
+        TreeNode left, right;
+        public TreeNode(int val) {
+            this.val = val;
+        }
+    }
+
+}
