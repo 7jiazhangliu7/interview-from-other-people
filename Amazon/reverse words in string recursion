@@ -1,0 +1,41 @@
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by Jiazhang_Liu on 6/19/2015.
+ */
+public class Solution {
+    public String reverseStringRecursive(String input) {
+        if(input == null || input.length() == 0) return input;
+
+        String[] ary = input.split(" ");
+
+        helper(ary, 0, ary.length-1);
+
+        StringBuffer s = new StringBuffer();
+        for(String i : ary) {
+            s.append(i).append(" ");
+        }
+        return s.toString().substring(0, s.length());
+    }
+
+    public void helper(String[] input, int start, int end) {
+        if(start >= end) {
+            return;
+        }
+
+        String temp = input[start];
+        input[start] = input[end];
+        input[end] = temp;
+
+        helper(input, start+1, end-1);
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+        String input = "   i am a cat      ";
+        System.err.println(s.reverseStringRecursive(input));
+    }
+}
