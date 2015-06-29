@@ -1,0 +1,58 @@
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by Jiazhang_Liu on 6/19/2015.
+ */
+public class Solution {
+    public int sumOfChild (TreeNode root) {
+        if(root == null) return 0;
+
+        int left = root.left == null ? 0 : (root.left.flag == 1 ? root.left.val : sumOfChild(root.left));
+
+        int right = root.right == null ? 0 : (root.right.flag == 1 ? root.right.val : sumOfChild(root.right));
+
+        root.val += left+right;
+        root.flag = 1;
+
+        return root.val;
+    }
+
+    public void print(TreeNode root) {
+        if(root == null) return;
+
+        System.err.println(root.val);
+        print(root.left);
+        print(root.right);
+    }
+
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+        TreeNode root = new TreeNode(5);
+        TreeNode n1 = new TreeNode(3);
+        TreeNode n2 = new TreeNode(-5);
+        TreeNode n3 = new TreeNode(7);
+        TreeNode n4 = new TreeNode(9);
+
+        root.left = n1;
+        root.right = n2;
+        n2.left = n3; n2.right = n4;
+
+        s.sumOfChild(root);
+
+        s.print(root);
+    }
+
+    public static class TreeNode {
+        int val;
+        int flag;
+        TreeNode left, right;
+        public TreeNode(int val) {
+            this.val =  val;
+            flag = 0;
+        }
+    }
+}
