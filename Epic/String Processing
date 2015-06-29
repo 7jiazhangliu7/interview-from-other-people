@@ -1,0 +1,40 @@
+example:
+        String = "8126595674";
+        int[] arr = [3,    2,     4,     1];
+        output :  "674 - 95 - 1265 - 8"
+
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by Jiazhang_Liu on 6/19/2015.
+ */
+public class Solution {
+    public String StringProcessing (String input, int[] array) {
+        if(input == null || input.length() == 0) return input;
+        if(array == null || array.length == 0) return input;
+
+        StringBuffer s = new StringBuffer();
+
+        int index = input.length();
+
+        while(index > 0) {
+            for(Integer i : array) {
+                s.append(input.substring(index-i, index).toCharArray()).append("-");
+                index -= i;
+            }
+        }
+
+        return s.toString().substring(0, s.length()-1);
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+        String input = "8126595674";
+        int[] array = {3,2,4,1};
+        System.err.println(s.StringProcessing(input, array));
+    }
+}
