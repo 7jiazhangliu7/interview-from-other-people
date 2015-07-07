@@ -1,0 +1,67 @@
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by Jiazhang_Liu on 6/19/2015.
+ */
+public class Solution {
+    public List<List<Integer>> printAllPath (TreeNode root) {
+        List<List<Integer>> result = new LinkedList<List<Integer>>();
+
+        if(root == null) return result;
+
+        helper(root, result, new LinkedList<Integer>());
+
+        return result;
+    }
+
+    public void helper(TreeNode root, List<List<Integer>> result, List<Integer> temp) {
+        if(root.left == null && root.right == null) {
+            temp.add(root.val);
+            result.add(new LinkedList<Integer>(temp));
+            if(temp.size() > 0)
+                temp.remove(temp.size() - 1);
+
+            return;
+        }
+
+        temp.add(root.val);
+        if(root.left != null)
+            helper(root.left, result, temp);
+
+        if (root.right != null)
+            helper(root.right, result, temp);
+
+        if(temp.size() > 0)
+            temp.remove(temp.size() - 1);
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        TreeNode root = new TreeNode(0);
+        TreeNode n1 = new TreeNode(1);
+        TreeNode n2 = new TreeNode(2);
+        TreeNode n3 = new TreeNode(3);
+        TreeNode n4 = new TreeNode(4);
+        TreeNode n5 = new TreeNode(5);
+
+        root.left = n1; root.right = n2;
+        n1.left = n3; n3.left = n4;
+        n3.right = n5;
+
+        System.err.println(s.printAllPath(root));
+    }
+
+    public static class TreeNode {
+        int val;
+        int flag;
+        TreeNode left, right;
+        public TreeNode(int val) {
+            this.val =  val;
+            flag = 0;
+        }
+    }
+}
