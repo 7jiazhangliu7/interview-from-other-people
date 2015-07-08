@@ -1,0 +1,49 @@
+import java.math.BigInteger;
+import java.util.*;
+
+/**
+ * Created by jiazhangliu on 6/1/15.
+ */
+public class Solution {
+    public void moveZerosToLeft (int[] array) {
+        if(array == null) return;
+
+        int index = 0;
+        int end = array.length-1;
+
+        while(index < end) {
+            while(array[end] != 0 && end > 0) {
+                end--;
+            }
+
+            while(array[index] == 0 && index < array.length-1) {
+                index++;
+            }
+
+            if(index >= end) break;
+
+            int temp = array[index];
+            array[index] = array[end];
+            array[end] = temp;
+
+            index++;
+            end--;
+        }
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        int[] input = {0,0,0,1,1,1,1,1,1,8,0,10};
+
+        for(Integer i : input)
+            System.err.print(i + " ");
+
+
+        System.err.println();
+        s.moveZerosToLeft(input);
+
+        for(Integer i : input)
+            System.err.print(i + " ");
+    }
+}
