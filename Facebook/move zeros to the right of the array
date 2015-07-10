@@ -1,0 +1,53 @@
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+/**
+ * Created by Jiazhang_Liu on 6/19/2015.
+ */
+public class Solution {
+    public void moveZerosToRight (int[] array) {
+        if(array == null || array.length == 0) return;
+
+        int index = array.length-1, curr = 0;
+
+        while(curr < index) {
+            while(array[curr] != 0) {
+                curr++;
+            }
+
+            while(array[index] == 0) {
+                index--;
+            }
+
+            if(curr >= index) return;
+
+            int temp = array[index];
+            array[index] = 0;
+            array[curr] = temp;
+
+            curr++;
+            index--;
+        }
+    }
+
+    public static void main(String args[]) {
+        Solution s = new Solution();
+
+        int[] array = {0,0,0,0,0,0,1,2,3,0,4,5,0,0,6,7,0,8,9,0,0,0};
+        s.moveZerosToRight(array);
+        for(Integer i : array)
+            System.err.print(i + " ");
+    }
+
+    public static class TreeNode {
+        int val;
+        int flag;
+        TreeNode left, right;
+        public TreeNode(int val) {
+            this.val =  val;
+            flag = 0;
+        }
+    }
+}
